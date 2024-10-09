@@ -1,0 +1,51 @@
+// Day 1
+##Variables:
+var str = "Hello world" 
+str = "Goodbye"  <- Updates local variable str
+
+If you try to initialize multiple variables with the same name Swift will flag this as an error.
+
+##Constants
+Initiate constants with the keyword let
+let str = "Hello world" <- Will not let you update this value
+
+##Types:
+Specify type when initialising an obj as follows
+let year: Int = 2024
+var name: String    <- Initialises a variable without a value
+
+#Strings:
+If needed you can write multi-line strings. Opening and closing quotation marks need to be 3x and on 
+their own lines.
+
+var str1 = """
+This goes
+over multiple
+lines
+"""
+
+When there are breaks in the text as written, this will be stored. If you do NOT want the string to be 
+displayed over multiple lines, use \'s at the end of each line.
+
+var str2 = """
+This will not go \
+over multiple \
+lines
+"""
+
+#Integers:
+Type used for whole numbers. For long numbers you can initiate them with _'s to make the input more readable. 
+eg. var population = 8_000_000
+
+#Doubles:
+"Double-precision floating-point numbers" hold values with fractions. 
+eg. var pi = 3.1415 is a double not an int
+
+#Booleans:
+True or false values. Not capitalised.
+eg. var thisIsABool = true
+
+##String Interpolation:
+Create strings using variable information from elsewhere in your code with this formatting
+var score = 85
+var str = "Your score was \(score)"
