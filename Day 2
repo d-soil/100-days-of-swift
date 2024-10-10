@@ -1,0 +1,82 @@
+//Day 2
+#Arrays:
+Two ways to make an array, 1) create from scratch while telling it what you're 
+going to put in it
+var arr = [String]() OR var arr = Array<Int>() <- to initialise an empty array 
+
+2) Create all your elements and then create your array with those elements
+let john = "John Lennon"
+let paul = "Paul McCartney"
+let george = "George Harrison"
+let ringo = "Ringo Star"
+let beatles = [john, paul, george, ringo]
+
+To access elements in an array start at 0. If you try to access an element 
+that doesn't exist Swift will be very unhappy.
+beatles[0]
+
+#Sets:
+Elements can only appear once in a set, and they are unordered.
+let colours = Set(["red", "green", "blue"])
+var colours2 = Set<String>() <- To create an empty set
+
+#Tuples:
+Items cannot be added or removed -> Tuples are a fixed size
+You cannot change the type of items in a Tuple
+You can access items in a tuple using numerical positions or by naming them
+
+var name = (first: "Taylor", last: "Swift")
+name.0 == "Taylor"
+name.first == "Taylor"
+
+#Comparing these methods of data storage:
+Arrays are the most common, they are good if the order of items matter 
+and you can have duplicates.
+Sets are useful if you do not want double-ups of values or if you want to 
+access it quickly.
+Tuples are useful if you need a specific collection of related values where 
+each item has a precise position or name. 
+
+#Dictionaries:
+Similar to arrays but instead of accessing with [0->(n-1)], you can access with the key
+let heights = [
+    "Taylor Swift": 1.78,
+    "Ed Sheeran": 1.73
+]
+
+To initialise an empty dictionary use the format [Key: Value]
+let dict = [String: Int]()  OR var dict = Dictionary<String, Int>()
+dict["Six"] = 6 <- To add new values to a dictionary that exists
+
+You can access the data stored using the key:
+heights["Taylor Swift"] == 1.78
+
+If you use a key that doesn't exist, it will return nil.
+You can change this by specifying a default value:
+heights["Jungkook", default: 2]
+
+#Enumerations:
+Cool way to group related values, can attach raw values or associated values to 
+store more info. eg.
+enum Result {
+    case success
+    case failure
+}
+let result = Result.failure
+
+enum Activity {
+    case bored
+    case running(destination: String)
+    case talking(topic: String)
+    case singing(volume: Int)
+}
+let johnStatus = Activity.talking(topic: "Soccer")
+
+enum Planet: Int {
+    case mercury
+    case venus
+    case earth
+    case mars
+}
+let earth = Planet(rawValue: 2) <- raw values will be auto assigned starting from 0
+or can be assigned a value like this or "case mercury = 1" in the enum
