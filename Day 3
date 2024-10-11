@@ -1,0 +1,60 @@
+// Day 3
+##Arithmetic Operations:
+Addition: +
+Subtraction: -
+Multiplication: *
+Division: /
+Modulo: %
+
+##Operator Overloading:
+Arrays, integers and strings can be joined (to themselves) with +'s
+
+##Compound Assignment Operators
+Shorthand operators like +=, -=, *=, /= work
+
+##Comparison Operators
+Is equal to: ==
+Is not equal to: !=
+
+Greater than: >
+Greater than or equal to: >=
+Less than: <
+Less than or equal to: <=
+
+##Conditionals
+if x == 1 {
+    print("X is 1")
+} else if x == 2 {
+    print("X is 2")
+} else {
+    print("X could be anything except 1 or 2")
+}
+
+##Combining Conditions:
+Logical AND operator: &&
+Logical OR operator: ||
+
+##Ternary Operator:
+A fun little shorthand if statement
+print(x == y ? "String if true" : "String if false")
+
+##Switch Statements
+Switch statements are better than a bunch of complicated if else ifs
+switch weather {
+    case "rain":
+        print("It is raining")
+    case "snow":
+        print("It is snowing")
+    case "sunny":
+        print("It is sunny")
+        fallthrough
+    default:
+        print("Enjoy your day!")
+}
+If you want to run the code from multiple cases, you can use the 'fallthrough' as seen above.
+
+##Range Operators:
+Half-open range operator: ..<
+eg. 1..<5 == 1, 2, 3, 4
+Closed range operator: ...
+eg. 1...5 == 1, 2, 3, 4, 5
