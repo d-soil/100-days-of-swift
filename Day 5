@@ -1,0 +1,92 @@
+// Day 5
+##Functions:
+func printMsg() {
+    let message = """
+This message will be printed!
+"""
+    print(message)
+}
+
+Run with printMsg().
+
+##Accepting Parameters & Returning Values:
+func square(number: Int) -> Int {
+    return(number * number)
+}
+let result = square(number: 8)
+
+##Parameter Labels:
+You can differentiate names for parameters internally vs externally by giving two names seperated by a space.
+func sayHello(to name: String) {
+    print("Hello, \(name)!")
+}
+
+To call this you would use
+sayHello(to: "Taylor")
+
+##Omiting Parameter Labels:
+You can omit the need to give parameter names when calling a function by using an underscore,
+func greet(_ person: String) {
+    print("Hello, \(person)!")
+}
+
+Then you can simply call
+greet("Taylor")
+
+It is better practise to USE external names for clarity
+
+##Default Parameters
+func greet(_ person: String, nicely: Bool = true) {
+    if nicely == true {
+        print("Hello, \(person)!")
+    } else {
+        print("Oh no, it's \(person) again...")
+    }
+}
+
+Now you can call:
+greet("Taylor")
+OR
+greet("Taylor", nicely: false)
+
+##Variadic Functions:
+A variadic function accent any number of parameters of the same time by using ...
+
+func square(numbers: Int...) {
+    for number in numbers {
+        print("\(number) squared is \(number * number)")
+    }
+}
+square(numbers: 1, 2, 3, 4, 5)
+
+##Throwing Functions
+enum PasswordError: Error {
+    case obvious
+}
+
+func checkPassword(_ password: String) throws -> Bool {
+    if password == "password" {
+        throw PasswordError.obvious
+    }
+    return True
+}
+Functions throwing errors need to be run intentionally
+
+do {
+    try checkPassword("password")
+    print("That password is good!")
+} catch {
+    print("You can't use that password.")
+}
+When the error is thrown it breaks out of the do block skipping the rest of the code and jumps to the catch block.
+
+##Inout Parameters:
+All parameters passed into a Swift function are constants. If you want to change them inside the function (and OUTSIDE) use inout. 
+
+eg. func doubleInPlace(number: inout Int) {
+    number *= 2
+}
+
+When calling this function you also have to use an &.
+var myNum = 0
+doubleInPlace(number: &myNum)
