@@ -1,0 +1,51 @@
+// Day 6
+##Closures:
+You can create functions assigned to variables
+
+eg. let driving = {
+    print("I'm driving")
+}
+
+You can then call driving as though it were a regular function
+driving()
+
+##Parameters IN Closures
+let driving = { (place: String) in
+    print("I'm going to \(place) in my car")
+}
+driving("London")
+Note: You dont use parameter labels when running cloures
+
+##Returning Values From Closures
+let drivingWithReturn = { (place: String) -> String in
+    return "I'm going to \(place) in my car"
+}
+let message = drivingWithReturn("London")
+
+##Closures as Parameters
+let driving = {
+    print("I'm driving in my car")
+}
+
+func travel(action: () -> void) {
+    print("I'm getting ready to go.")
+    action()
+    print("I have arrived!")
+}
+
+travel(action: driving)
+
+##Trailing Closure Syntax:
+If the last parameter to a function is a closure, you can use trailing closure syntax.
+Rather than passing your closure as a parameter, you can pass it after the function in brackets.
+
+travel() {
+    print("I'm driving in my car")
+}
+
+or, because there aren't any other parameters, we can call it:
+
+travel {
+    print("I'm driving in my car")
+}
+
