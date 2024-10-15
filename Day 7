@@ -1,0 +1,44 @@
+// Day 7
+##Closures With Parameters:
+func travel(action: (String) -> Void) {
+    print("I'm getting ready to go")
+    action("London")
+    print("I arrived!")
+}
+
+can be called with:
+travel{ (place: String) in
+    print("I'm going to \(place) in my car"
+    )
+}
+
+##Closures With Return Values:
+func travel(action: (String) -> String) {
+    print("I'm getting ready to go.")
+    let description = action("London")
+    print(description)
+    print("I have arrived!")
+}
+
+So when we call it with trailing closure syntax, our closure 
+code is required to accept a string and return a string:
+travel { (place: String) -> String in
+    return "I'm going to \(place) in my car"
+}
+
+##Shorthand Parameter Names:
+Since Swift knows the parameter to the closure must be a string AND the return must
+be a string, so we can remove both for the shorthand:
+travel { place in
+    return "I'm going to \(place) in my car"
+} 
+
+Which can then shorten to 
+travel { place in
+    "I'm going to \(place) in my car"
+} 
+This works because the closure only has one line of code- so it must be the return value.
+It can be shortened even further to:
+travel {
+    "I'm going to \($0) in my car"
+}
