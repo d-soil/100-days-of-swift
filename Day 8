@@ -1,0 +1,102 @@
+//Day 8
+##Creating Structs:
+Swift lets you design your own types in two ways, structs, short for
+structures, are the first way.
+
+struct Sport {
+    var name: String
+}
+
+var tennis = Sport(name: "Tennis")
+print(tennis.name)
+
+This internal info can be updated externally although it is unclear if
+this is bad practise
+eg. tennis.name = "Lawn tennis"
+
+##Computed Properties
+Structures have stored properties (eg var name: String) and computed properties.
+
+struct Sport {
+    var name: String
+    var isOlympicSport: Bool
+
+    var olympicStatus: String {
+        if isOlympicSport {
+            return "\(name) is an Olympic sport"
+        } else {
+            return "\(name) is not an Olympic sport"
+        }
+    }
+}
+Here olympicStatus is a computed property.
+
+##Property Observers
+Property observers let you run code before or after any property changes.
+
+struct Progress {
+    var task: String
+    var amount: Int
+}
+
+var progress = Progress(task: "Loading data", amount: 0)
+progress.amount = 30
+progress.amount = 80
+progress.amount = 100
+
+We want Swift to print a message every time amount changes, so we can use didSet
+
+struct Progress {
+    var task: String
+    var amount: Int{
+        didSet {
+            print("\(task) is not \(amount)% complete")
+        }
+    }
+}
+You can also use willSet to take action BEFORE the property is changed but it is uncommon.
+
+##Methods: 
+Functions inside structs are called methods
+struct City {
+    var population: Int
+    func collectTaxes() -> Int {
+        return population * 1000
+    }
+}
+
+let london = City(popultion: 9_000_000)
+london.collectTaxes()
+
+##Mutating Methods:
+If structures are created as constants their properties can't be changed.
+If you want to change a property inside a method you need to use 'mutating'
+
+struct Person {
+    var name: String
+
+    mutating func makeAnonymous() {
+        name = "Anonymous"
+    }
+}
+
+This method can only be called on Person instances which are variables.
+
+
+##String Methods
+Some string methods and properties!
+let string = "Yippee!"
+
+print(string.count)
+print(string.hasPrefix("Yip")) //returns true if string starts with specified string
+print(string.uppercased())
+print(string.sorted()) //sorts the letters of the string into an array
+
+##Array Methods:
+var toys = ["Woody"]
+
+print(toys.count)
+toys.append("Buzz")
+toys.firstIndex(of: "Buzz)
+print(toys.sorted())
+toys.remove(at: 0)

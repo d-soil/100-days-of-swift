@@ -42,3 +42,46 @@ It can be shortened even further to:
 travel {
     "I'm going to \($0) in my car"
 }
+
+##Closures With Multiple Parameters:
+func travel(action: (String, Int) -> String) {
+    print("I'm getting ready to go.")
+    let description = action("London", 60)
+    print(description)
+    print("I arrived!")
+}
+Can be called with:
+travel {
+    "I'm going to \($0) at \($1) miles per hour."
+} 
+Some people don't like to use shorthand parameter names as they can be confusing!
+
+##Returning Closures:
+In the same way you can pass a closure to a function, closures can be returned 
+from a function. It uses a double -> to specify your return then the closure's return
+
+func travel() -> (String) -> (Void) {
+    return {
+        print("I'm going to \($0)")
+    }
+}
+
+let result = travel()
+result("London")
+
+You can technically also do this like this: 
+let result2 = travel()("London")
+But it is dispreferred.
+
+##Capturing Values:
+External values used inside closures are 'captured'
+Closure capturing will happen if we create values in travel() that get used inside the closure
+func travel() -> (String) -> Void {
+    var counter = 1
+
+    return {
+        print("\(counter). I'm going to \($0)")
+        counter += 1
+    }
+}
+So if we called result("London") multiple times the counter would increment
