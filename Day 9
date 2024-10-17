@@ -1,0 +1,84 @@
+//Day 9
+##Initialisers:
+Initialisers are the special methods. The default 'memberwise 
+initialiser' asks you to provide a value for each property when you
+create the struct.
+
+eg. Overwrite the default by deifning your own initialiser
+struct User {
+    var username: String
+
+    init() {
+        username = "Anonymous"
+        print("Creating a new user!")
+    }
+}
+
+var user = User()
+user.username = "coolguy"
+
+##Self:
+struct Person {
+    var name: String
+
+    init(name: String) {
+        print("\(name) was born!")
+        self.name = name
+    }
+}
+You can use self.name to access the internal name property, while name
+refers to the parameter.
+
+##Lazy Properties:
+struct FamilyTree {
+    init() {
+        print("Creating family tree!")
+    }
+}
+
+struct Person {
+    var name: String
+    var familyTree = FamilyTree()
+
+    init(name: String) {
+        self.name = name
+    }
+}
+
+var ed = Person(name: "Ed")
+
+When we run this, it will create the family tree and print the message.
+You can delay this and only create the family tree when it is
+accessed by using lazy
+
+eg. lazy var familyTree = FamilyTree()
+
+##Static Properties and Methods
+struct Student {
+    static var classSize = 0
+    var name: String
+
+    init(name: String) {
+        self.name = name
+        Student.classSize += 1
+    }
+}
+
+To access this value externally, call it using Student.classSize
+
+##Access Control:
+Create private variables which can only be accessed internally. 
+
+struct Person {
+    private var id: String
+
+    init(id: String) {
+        self.id = id
+    }
+
+    func identify() -> String {
+        return "My social security number is \(id)"
+    }
+}
+
+You can also use the keyword public to do the opposite!
