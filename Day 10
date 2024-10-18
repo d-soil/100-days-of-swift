@@ -1,0 +1,84 @@
+//Day 10
+##Classes:
+Similar to structs but with FIVE important differences!
+1) Does not come with a memberwise initialiser- must always define init
+eg. class Dog {
+    var name: String
+    var breed: String
+
+    init(name: String, breed: String) {
+        self.name = name
+        self.breed = breed
+    }
+}
+
+2) Classes can extend existing classes and inherit their methods and properties!
+eg. class Poodle: Dog {
+    init(name: String) {
+        super.init(name: name, breed: "Poodle")
+    }
+}
+
+Note: Child classes can override parent methods.
+class Dog {
+    func makeNoise() {
+        print("Woof!")
+    }
+}
+
+class Poodle: Dog {
+}
+let poppy = Poodle()
+poppy.makeNoise()
+
+class Poodle: Dog {
+    override func makeNoise() {
+        print("Yip!")
+    }
+}
+
+Now poppy.makeNoise() will print "Yip!"
+
+##Final Classes:
+You can disallow inheritance by using the keyword final
+eg. final class Dog {
+    ...
+}
+
+3) When you copy a struct the original and copy are different obejcts.
+When you copy a class, the original and copy both print to the same thing.
+
+class Singer {
+    var name = "Taylor Swift"
+}
+
+var singer = Singer()
+print(singer.name)
+
+var singerCopy = singer
+singerCopy.name = "Justin Bieber"
+
+printing singer.name will give "Justin Bieber"
+
+If this was a struct, singer.name would still be "Taylor Swift"
+
+4) Classes have deinitialisers- code that runs when an instance of a class is destroyed
+eg. class Person {
+    var name = "John Doe"
+
+    init() {
+        print("\(name) is alive!")
+    }
+
+    func printGreeting() {
+        print("Hello, I'm \(name)")
+    }
+    
+    deinit {
+        print("\(name) is no more!")
+    }
+}
+
+5) Mutability - Constant classes with variable properties CAN be updated.
+Because of this the keyword mutating is not necessary for classes.
+
