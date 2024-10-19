@@ -1,0 +1,102 @@
+//Day 11
+##Protocols:
+A way of describing what properties and methods something must have
+
+We can write a function that accepts something with an id property, but
+we don't care what type of data is used. We'll start by creating an Identifiable
+protocol, which will require all confirming types to have an id string that can
+read and written.
+protocol Identifiable {
+    var id: String { get set }
+}
+
+We can't create an instance of a protocol, but we can create a struct that conforms to it
+struct User: Identifiable {
+    var id: String
+}
+
+Then we can write a function that accepts any Identifiable object
+func displayID(thing: Identifiable) {
+    print("My ID is \(thing.id)")
+}
+
+##Protocol Inheritance:
+You can inherit from multiple protocols!
+
+protocol Payable {
+    func calculateWages() -> Int
+}
+
+protocol NeedsTraining {
+    func study()
+}
+
+protocol HasVacation {
+    func takeVacatino(days: Int)
+}
+
+protocol Employee: Payable, NeedsTraining, HasVacation { }
+
+##Extensions:
+Extensions allow you to add methods to existing types
+
+extension Int {
+    func squared() -> Int {
+        return self * self
+    }
+}
+
+Then you can:
+let number = 8
+number.squared()
+
+You can't add stored properties in extensions, so you have to use computed properties
+eg. extension Int {
+    var isEven: Bool {
+        return self % 2 == 0
+    }
+}
+
+##Protocol Extensions: 
+Protocols let you describe methods something should have but don't provide the code inside. Extensions provide the code inside methods but only affect one data type (Can't do multiple types at once)
+Protocol extensions fix this problem!
+
+let pythons = ["Eric", "Graham", "John", "Michael", "Terry", "Terry"]
+let beatles = Set(["John", "Paul", "George", "Ringo"])
+
+Arrays and sets both conform to a protocol called Collection, to you can extend this protocol to extend both at once
+
+extension Collection {
+    func summarize() {
+        print("There are \(count) of us:")
+
+        for name in self{
+            print(name)
+        }
+    }
+}
+
+pythons.summarize()
+beatles.summarize()
+
+##Protocol-oriented Programming
+Protocol extensions can provide default implementations for our own protocol methods, which allows a technique called protocol oriented programming. 
+
+protocol Identifiable {
+    var id: String { get set }
+    func identify()
+}
+
+extension Identifiable {
+    func identify() {
+        print("My ID is \(id).")
+    }
+}
+
+Now when we create a type that conforms to Identifiable it gets identify() automatically.
+eg. struct User: Identifiable {
+    var id: String
+}
+
+let twostraws = User(id: "twostraws")
+twostraws.identify()
