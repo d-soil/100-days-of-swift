@@ -1,0 +1,116 @@
+//Day 12
+##Handling Missing Data:
+To make a type optional, add a ?.
+eg. var age: Int? = nil
+This doesn't hold any number, it holds nothing, but we could later update it.
+
+##Unwrapping Optionals:
+var name: String? = nil
+
+If we used name.count it could be a problem if there's a null value, so instead we unwrap!
+if let unwrapped = name {
+    print("\(unwrapped.count) letters")
+} else {
+    print("Missing name.")
+}
+If name holds a string, it has a value and the first line of code will run, if not, the else code will run.
+
+##Unwrapping With Guard:
+Instead of if let, you can use guard let. The difference is that guard let will expect you to exit when it finds a nil, and you can use your unwrapped var after the guard.
+
+func greet(_ name: String?) {
+    guard let unwrapped = name else {
+        print("You didn't provide a name!")
+        return
+    }
+
+    print("Hello, \(unwrapped)!")
+}
+
+##Force Unwrapping:
+You can force convert something from an optional type to a non-optional type.
+
+let str = "5"
+let num = Int(str)
+
+num is an optional int, because you might've tried to convert a string like "fish" instead of a number. You can force unwrap the result by using !
+let num = Int(str)!
+
+In this case num will be an Int not an Int?. But if the string being converted isnt a valid integer, it will crash your code.
+
+##Implicitly Unwrapped Optionals:
+let age: Int! = nil
+Implicitly unwrapped optionals might contain a value or might be nil, you don't need to unwrap them to use them. This can be dangerous because you could crash bc of a nil. 
+
+##Nil Coalescing:
+func username(for id: Int) -> String? {
+    if id == 1 {
+        return "Taylor Swift"
+    } else {
+        return nil
+    }
+}
+
+If there is no value a default will be used. 
+If we call this function with ID 15, we would get a nil, but using nil coalescing we can have a default value "Anonymous":
+
+let user = username(for: 15) ?? "Anonymous"
+
+This will check the result that comes back from the username function and use a string if it comes back or use Anonymous if nil comes back.
+
+##Optional Chaining:
+If you want to access something like a.b.c and b is optional, you can write a question mark to enable optional chaining: a.b?.c
+Swift will check if b has a value and if it's nil it'll stop early
+
+let names = ["John", "Paul", "George", "Ringo"]
+let beatle = names.first?.uppercassed()
+
+##Optional Try:
+Compared to our checkPassword function from day 5 where we learned about throwing errors, we can use try?
+if let result = try? checkPassword("password") {
+    print("Result was \(result)")
+} else {
+    print("D'oh.")
+}
+
+You can also use try! when you know for sure the function won't fail.
+try! checkPassword("sekrit")
+print("Ok!")
+
+##Failable Initializers:
+An initialiser that might or might not work. 
+eg. let str = "5"
+let num = Int(str)
+
+You can also write these in your structs and classes. 
+struct Person {
+    var id: String
+
+    init?(id: String) {
+        if id.count == 9 {
+            self.id = id
+        } else {
+            return nil
+        }
+    }
+}
+
+##Typecasting:
+class Animal { }
+class Fish: Animal { }
+
+class Dog: Animal {
+    func makeNoise() {
+        print("Woof!")
+    }
+}
+
+let pets = [Fish(), Dog(), Fish(), Dog()]
+
+Swift sees pets as an array of Animals. If we wanted to get the dogs to bark we will have to check whether each pet is a Dog object. We can use as? so nil will be returned if the typecast fails
+
+for pet in pets {
+    if let dog = pet as? Dog {
+        dog.makeNoise()
+    }
+}
